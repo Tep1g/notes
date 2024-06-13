@@ -28,4 +28,4 @@
 - Nvidia
 
 ## Name for paper
-#### The Cultural, Technological, and Business Impacts of the Online Gaming Market Ecommerce Segment
+#### The Cultural, Technological, and Business Impacts of the Online Gaming ~~Market~~ Ecommerce Segment
