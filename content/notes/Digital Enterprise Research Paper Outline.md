@@ -1,6 +1,6 @@
 ## Purpose
 #### What questions am I looking to raise/answer?
--What kinds 
+-What kinds of impacts has the gaming market had on 
 #### Why should the average reader care?
 -How do these niche markets affect the greater culture?
 -Examples of modern trends set by these niche markets
