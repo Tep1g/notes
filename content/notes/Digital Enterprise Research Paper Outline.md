@@ -8,24 +8,24 @@
 -How do these niche markets influence greater ecommerce ecosystems?
 ## Ideas
 #### Virtual Reality / Augmented Reality
--How VR Headsets can be applied to the way consumers interact with products
+- How VR Headsets can be applied to the way consumers interact with products
 #### Minecraft ecommerce
--Server hosting services
--Profitable multiplayer servers
--Commissioning services for building/skins
--Mod Creating Community
+- Server hosting services
+- Profitable multiplayer servers
+- Commissioning services for building/skins
+- Mod Creating Community
 #### Steam
--Steam Community Markets
--CSGO skins/lootboxes/keys
--The TF2 hat crash
+- Steam Community Markets
+- CSGO skins/lootboxes/keys
+- The TF2 hat crash
 #### VRChat
--Skin commissioning market
--The growth of VRChat as a result of VR hardware
+- Skin commissioning market
+- The growth of VRChat as a result of VR hardware
 #### Computer Hardware
--"Gaming" marketing
--Consumer Hardware
--Crypto/AI/Gaming overlap in GPUs
--Nvidia
+- "Gaming" marketing
+- Consumer Hardware
+- Crypto/AI/Gaming overlap in GPUs
+- Nvidia
 
 ## Name for paper
 #### The Cultural, Technological, and Business Impacts of the Online Gaming Market Ecommerce Segment
