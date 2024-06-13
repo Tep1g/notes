@@ -1,11 +1,11 @@
 ## Purpose
 #### What questions am I looking to raise/answer?
--What kinds of impacts has the gaming market had on 
+- What kinds of impacts has the gaming market had on 
 #### Why should the average reader care?
--How do these niche markets affect the greater culture?
--Examples of modern trends set by these niche markets
+- How do these niche markets affect the greater culture?
+- Examples of modern trends set by these niche markets
 #### What larger question does this paper address?
--How do these niche markets influence greater ecommerce ecosystems?
+- How do these niche markets influence greater ecommerce ecosystems?
 ## Ideas
 #### Virtual Reality / Augmented Reality
 - How VR Headsets can be applied to the way consumers interact with products
