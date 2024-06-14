@@ -43,4 +43,4 @@
 ## Research Papers
 - [We Don't Sell Blocks](https://www.academia.edu/102217560/We_Dont_Sell_Blocks_Exploring_Minecrafts_Commissioning_Market?uc-sb-sw=12054336)
 - [View, Play and Pay?](https://www.researchgate.net/publication/338571390_View_Play_and_Pay_-_The_Relationship_between_Consumption_of_Gaming_Video_Content_and_Video_Game_Playing_and_Buying)
-- 
+- [PC-Builders - A Social Phenomenon](https://www.academia.edu/83256812/PC_builders_a_social_phenomenon_of_technologically_oriented_subculture_during_COVID_19_pandemic_in_XXI_c)
