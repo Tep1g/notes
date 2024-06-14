@@ -1,6 +1,6 @@
 ## Purpose
 #### What questions am I looking to raise/answer?
-- What kinds of impacts has the gaming market had on 
+- What kinds of impacts has the gaming market had on culture, business, and tech
 #### Why should the average reader care?
 - How do these niche markets affect the greater culture?
 - Examples of modern trends set by these niche markets
@@ -20,7 +20,7 @@
 - The TF2 hat crash
 #### VRChat
 - Skin commissioning market
-- The growth of VRChat as a result of VR hardware
+- The growth/existence of VRChat as a result of VR hardware
 #### Computer Hardware
 - "Gaming" marketing
 - Consumer Hardware
