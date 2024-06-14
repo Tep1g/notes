@@ -29,3 +29,6 @@
 
 ## Name for paper
 #### The Cultural, Technological, and Business Impacts of the Online Gaming ~~Market~~ Ecommerce Segment
+
+## Research Papers
+- We Don't Sell Blocks
