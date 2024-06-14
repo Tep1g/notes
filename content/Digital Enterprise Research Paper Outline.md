@@ -9,7 +9,12 @@
 ## Ideas
 #### Virtual Reality / Augmented Reality
 - How VR Headsets can be applied to the way consumers interact with products
-- Devices such as vive trackers
+- Devices such as Vive trackers
+- VRChat Skin commissioning market
+- The growth/existence of VRChat as a result of VR hardware
+- Meta (lol)
+- The coming and going of Pokemon Go as a social trend
+- Snapchat lenses
 #### Minecraft ecommerce
 - Server hosting services
 - Profitable multiplayer servers
@@ -19,9 +24,6 @@
 - Steam Community Markets
 - CSGO skins/lootboxes/keys
 - The TF2 hat crash
-#### VR Gaming
-- VRChat Skin commissioning market
-- The growth/existence of VRChat as a result of VR hardware
 #### Computer Hardware
 - "Gaming" marketing
 - Consumer Hardware
@@ -31,14 +33,16 @@
 - Streamers/YouTubers
 - Sponsorships
 - Adsense
-#### Esports
-- Sponsored Organizations
+- Reviews
+#### Gaming
+- Sponsored Esports Organizations
+- The mainstream social circles that massive games like COD and Frtnite inhabit
 - Advertising
 - Audience Scale
 - Revenue
 
 ## Name for paper
-#### The Cultural, Technological, and Business Impacts of the Online Gaming ~~Market~~ Ecommerce Segment
+##### The Cultural, Technological, and Business Impacts of the Online Gaming ~~Market~~ Ecommerce Segment
 
 ## Research Papers
 - [We Don't Sell Blocks](https://www.academia.edu/102217560/We_Dont_Sell_Blocks_Exploring_Minecrafts_Commissioning_Market?uc-sb-sw=12054336)
