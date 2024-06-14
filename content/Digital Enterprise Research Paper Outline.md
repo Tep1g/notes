@@ -29,6 +29,7 @@
 - Consumer Hardware
 - Crypto/AI/Gaming overlap in GPUs
 - Nvidia
+- PC Building Subculture
 #### Influencer marketing
 - Streamers/YouTubers
 - Sponsorships
