@@ -19,8 +19,8 @@
 - Steam Community Markets
 - CSGO skins/lootboxes/keys
 - The TF2 hat crash
-#### VRChat
-- Skin commissioning market
+#### VR Gaming
+- VRChat Skin commissioning market
 - The growth/existence of VRChat as a result of VR hardware
 #### Computer Hardware
 - "Gaming" marketing
