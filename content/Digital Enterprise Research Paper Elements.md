@@ -12,7 +12,8 @@
 - Devices such as Vive trackers
 - VRChat Skin commissioning market
 - The growth/existence of VRChat as a result of VR hardware
-- Meta (lol)
+- VRChat as the inspiration for Meta (lol)
+- The irony in Meta Quest being the predominant VR headset in VRChat
 - The coming and going of Pokemon Go as a social trend
 - Snapchat lenses
 #### Minecraft ecommerce
@@ -26,6 +27,7 @@
 - The TF2 hat crash
 #### Computer Hardware
 - "Gaming" marketing
+- How esports and competitive gaming influenced the marketing for computer hardware
 - Consumer Hardware
 - Crypto/AI/Gaming overlap in GPUs
 - Nvidia
@@ -41,7 +43,11 @@
 - Advertising
 - Audience Scale
 - Revenue
-
+- ML in the AI of video game characters (skyrim video)
+#### Cloud Services
+- Dedicated Hosting Services
+- Cloud Gaming Services (GeForce Now, Xbox Cloud, Stadia)
+- Developers' use of internal servers
 ## Name for paper
 ##### The Cultural, Technological, and Business Impacts of the Online Gaming ~~Market~~ Ecommerce Segment
 
