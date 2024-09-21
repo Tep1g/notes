@@ -1,5 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to Tepig's Notes
 ---
 
 Welcome to my website!
