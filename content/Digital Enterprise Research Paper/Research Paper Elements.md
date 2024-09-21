@@ -12,7 +12,7 @@
 - Devices such as Vive trackers
 - VRChat Skin commissioning market
 - The growth/existence of VRChat as a result of VR hardware
-- VRChat as the inspiration for Meta (lol)
+- VRChat as the inspiration for Horizon Worlds (lol)
 - The irony in Meta Quest being the predominant VR headset in VRChat
 - The coming and going of Pokemon Go as a social trend
 - Snapchat lenses
