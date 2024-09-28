@@ -33,14 +33,18 @@ int main() {
 ```
 
 The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
-`>> gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm`.
+```
+>> gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm`
+```
 
-We can use [`sum_commented.asm`]() to get a good idea of how the assembly code works.
+We can use [this commented assembly code]() to get a good idea of how it works.
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 
 Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command.
-`>> objdump -d sum > sum.asm`
+```
+>> objdump -d sum > sum.asm
+```
 ## Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
 ```python
