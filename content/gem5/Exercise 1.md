@@ -1,4 +1,3 @@
-
 ## Background Info
 Before starting the exercise, we need to understand how gem5 actually works. The following questions are raised at this point:
 - What architectures does gem5 simulate?
@@ -9,6 +8,7 @@ Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MI
 
 ## Program
 Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. The following C program takes the sum of the elements within an array and prints it.
+### `sum.c`
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +31,16 @@ int main() {
     return 0;
 }
 ```
+
+The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
+`>> gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm`.
+
+We can use [`sum_commented.asm`]() to get a good idea of how the assembly code works.
+
+Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
+
+Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command.
+`>> objdump -d sum > sum.asm`
 ## Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
 ```python
@@ -68,7 +78,7 @@ board = SimpleBoard(
     cache_hierarchy=cache_hierarchy,
 )
 
-binary = BinaryResource(local_path="tests/test-progs/sum/bin/sum")
+binary = BinaryResource(local_path="tests/test-progs/sum/bin/x86/linux/sum")
 board.set_se_binary_workload(binary)
 
 simulator = Simulator(board=board)
@@ -77,4 +87,4 @@ simulator.run()
 ```
 
 ## System Diagram
-[The following diagram](images/config.dot.pdf) is generated upon simulation.
+[The following diagram](public/gem5/images/config.dot.pdf) is generated upon simulation.
