@@ -91,4 +91,4 @@ simulator.run()
 ```
 
 ## System Diagram
-[The following diagram](public/gem5/images/config.dot.pdf) is generated upon simulation.
+[The following diagram](gem5/images/config.dot.pdf) is generated upon simulation.
