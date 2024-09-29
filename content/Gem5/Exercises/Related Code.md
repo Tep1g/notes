@@ -1,7 +1,7 @@
 ## Exercise 1
 ### Program
 Code snippets referenced in the [Program](Gem5/Exercises/Exercise-1#program) section.
-#### `sum.c`
+#### sum.c
 Referenced in [Source Code](Gem5/Exercises/Exercise-1#source-code).
 ```c
 #include <stdio.h>
@@ -25,7 +25,7 @@ int main() {
     return 0;
 }
 ```
-#### `sum_fverbose.asm`
+#### sum_fverbose.asm
 Referenced in [Compilation](Gem5/Exercises/Exercise-1#compilation).
 ```asm
 	.file	"sum.c"
@@ -130,7 +130,7 @@ main:
 	.section	.note.GNU-stack,"",@progbits
 
 ```
-#### `sum.asm`
+#### sum.asm
 Referenced in [Compilation](Gem5/Exercises/Exercise-1#compilation).
 ```asm
 
@@ -300,7 +300,7 @@ Disassembly of section .fini:
 ```
 ### Simulation
 Code snippets referenced in the [Simulation](Gem5/Exercises/Exercise-1#simulation) section.
-#### `simple.py`
+#### simple.py
 Referenced in [Configuration](Gem5/Exercises/Exercise-1#configuration).
 ```python
 from gem5.components.boards.simple_board import SimpleBoard

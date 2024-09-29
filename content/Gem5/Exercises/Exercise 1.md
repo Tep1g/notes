@@ -8,7 +8,7 @@ Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MI
 ## Program
 ### Source Code
 Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. This program takes the sum of the elements within an array and prints it. [The full sum.c program can be found here](Gem5/Exercises/Related-Code#Exercise-1#sumc).
-#### `sum.c`
+#### sum.c
 ```c
 static void sum_arr(uint8_t *arr, uint8_t arr_len, uint8_t *sum) {
     for (int i = 0; i < arr_len; i++) {
@@ -33,7 +33,7 @@ The following command uses GCC to compile `sum.c` into an assembly file that we 
  >> gcc -S -fverbose-asm -O0 sum.c -o sum_fverbose.asm
 ```
 We can use `sum_fverbose.asm` to get an idea of how the low-level instructions work. [The full sum_fverbose.asm file can be found here](Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm)
-#### `sum_fverbose.asm`
+#### sum_fverbose.asm
 ```asm
 # sum.c:6:     for (int i = 0; i < arr_len; i++) {
 	jmp	.L2	#
@@ -58,7 +58,7 @@ Alternatively, we can use objdump to analyze the compiled binary file's assembly
  >> objdump -d sum > sum.asm
 ```
 Notice how the `sum.asm` instructions are simpler than `sum_commented.asm`. I've also added my own comments to this file. [The full sum.asm can be found here](Gem5/Exercises/Related-Code#sumasm).
-#### `sum.asm`
+#### sum.asm
 ```asm
 0000000000001139 <sum_arr>:
     1139:	55                   	push   %rbp
@@ -96,7 +96,7 @@ We can then use the following command to compile `sum.c` into a binary file that
 ## Simulation
 ### Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script. [The full simple.py script can be found here](Gem5/Exercises/Related-Code#simplepy).
-#### `simple.py`
+#### simple.py
 ```python
 cache_hierarchy = MESITwoLevelCacheHierarchy(
     l1d_size="16kB",
