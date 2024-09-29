@@ -18,12 +18,12 @@ We can use [sum_commented.asm](https://notes.tepig.pro/Gem5/Exercises/Related-Co
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 ```bash
->> gcc -fverbose -O0 -o sum
+ >> gcc -fverbose-asm -O0 sum.c -o sum
 ```
 
 Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. I have added comments
 ```bash
->> objdump -d sum > sum.asm
+ >> objdump -d sum > sum.asm
 ```
 ## Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
