@@ -1,7 +1,9 @@
 ## Exercise 1
-Code snippets referenced by [Exercise 1]()
-### `sum.c`
-Referenced by [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) in Program
+Code snippets referenced in [Exercise 1](https://notes.tepig.pro/Gem5/Exercises/Exercise-1)
+### Program
+Code snippets referenced in the [Program](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#program) section.
+#### `sum.c`
+Referenced in the [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) section.
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,8 +26,8 @@ int main() {
     return 0;
 }
 ```
-### `sum_commented.asm`
-Referenced by [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) in Program
+#### `sum_fverbose.asm`
+Referenced in the [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) section.
 ```asm
 	.file	"sum.c"
 # GNU C17 (Debian 12.2.0-14) version 12.2.0 (x86_64-linux-gnu)
