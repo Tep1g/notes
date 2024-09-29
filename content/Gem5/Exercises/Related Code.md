@@ -1,5 +1,4 @@
 ## Exercise 1
-### Program
 #### `sum.c`
 Referenced in the [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) section.
 ```c
@@ -129,7 +128,7 @@ main:
 	.section	.note.GNU-stack,"",@progbits
 
 ```
-### `sum.asm`
+#### `sum.asm`
 Referenced in the [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) section.
 ```asm
 
@@ -297,9 +296,8 @@ Disassembly of section .fini:
     11dc:	c3                   	ret
 
 ```
-### Simulation
-Code snippets referenced in the [Simulation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#simulation) section.
 #### `simple.py`
+Referenced in the [Configuration] section
 ```python
 from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.cachehierarchies.ruby.mesi_two_level_cache_hierarchy import (
