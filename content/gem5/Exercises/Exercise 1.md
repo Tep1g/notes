@@ -36,7 +36,7 @@ The following command uses GCC to compile `sum.c` into an assembly file that we 
  gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
-We can use [this commented assembly code](https://tep1g.github.io/notes/gem5/Exercises/Related-Code#sum_commentedasm) to get an idea of how it works.
+We can use [this commented assembly code](https://tep1g.github.io/notes/Gem5/Exercises/Related-Code#sum_commentedasm) to get an idea of how it works.
 
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
@@ -90,4 +90,4 @@ simulator.run()
 ```
 
 ## System Diagram
-[The following diagram](content/gem5/images/config.dot.pdf) is generated upon simulation.
+[The following diagram](https://tep1g.github.io/notes/Gem5/images/config.dot.pdf/)is generated upon simulation.
