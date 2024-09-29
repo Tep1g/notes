@@ -150,4 +150,4 @@ hostInstRate                                   334694                       # Si
 hostOpRate                                     656317                       # Simulator op (including micro ops) rate (op/s) ((Count/Second))
 ```
 
-[This diagram](Gem5/images/config.dot.pdf) is also generated upon simulation. This diagram visualizes the hardware that we configured in `simple.py`.
+[This diagram](Gem5/images/config.dot.pdf) is also generated upon simulation, this visualizes the hardware that we configured in `simple.py`.
