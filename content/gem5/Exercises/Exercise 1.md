@@ -5,7 +5,6 @@ Before starting the exercise, we need to understand how gem5 actually works. The
 - How do we actually run a simulation?
 
 Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MIPS, POWER, and SPARC, it even supports the AMD VEGA GPU. The hardware components for the respective ISAs are written and compiled in C++, and a Python wrapper is used to configure and instantiate them during simulation.
-
 ## Program
 Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. The following C program takes the sum of the elements within an array and prints it.
 ### `sum.c`
@@ -31,19 +30,20 @@ int main() {
     return 0;
 }
 ```
-
+###
 The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
-```
->> gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm`
+```bash
+ gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
-We can use [this commented assembly code]() to get a good idea of how it works.
+We can use [this commented assembly code](gem5/Exercises/Related-Code#sum_commentedasm) to get an idea of how it works.
+
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 
 Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command.
-```
->> objdump -d sum > sum.asm
+```bash
+objdump -d sum > sum.asm
 ```
 ## Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
@@ -87,8 +87,7 @@ board.set_se_binary_workload(binary)
 
 simulator = Simulator(board=board)
 simulator.run()
-
 ```
 
 ## System Diagram
-[The following diagram](gem5/images/config.dot.pdf) is generated upon simulation.
+[The following diagram](content/gem5/images/config.dot.pdf) is generated upon simulation.

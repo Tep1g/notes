@@ -13,3 +13,6 @@ For this research exploration, I'll be editing gem5 within Windows Subsystem for
 I will be using Git as my version control system with GitHub as my platform, this means that every change to my forked gem5 repo will be organized and timestamped. My gem5 repo can be found [here](https://github.com/Tep1g/gem5).
 
 <img src="gem5/images/github.png" alt="github" width="100"/>
+
+## Exercises
+We'll be going through the following exercises to get a better understanding of gem5's capabilities.
