@@ -13,7 +13,6 @@ The following command uses GCC to compile `sum.c` into an assembly file that we 
 ```bash
  >> gcc -S -fverbose-asm -O0 sum.c -o sum_fverbose.asm
 ```
-
 We can use `sum_commented.asm` to get an idea of how the low-level instructions work.
 
 Then, we can use the following command to compile `sum.c` into a binary file that the simulator can run. We'll name this file `sum`.
