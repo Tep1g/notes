@@ -11,19 +11,19 @@ Now that we understand how gem5 works, we need to create a program that our simu
 ### Compilation
 The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code, and `-O0` disables compiler optimization.
 ```bash
- gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
+ >> gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
 We can use [sum_commented.asm](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how the low-level instructions work.
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 ```bash
-gcc -fverbose -O0 -o sum
+>> gcc -fverbose -O0 -o sum
 ```
 
 Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. I have added comments
 ```bash
-objdump -d sum > sum.asm
+>> objdump -d sum > sum.asm
 ```
 ## Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
