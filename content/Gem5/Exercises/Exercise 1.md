@@ -127,6 +127,10 @@ board.set_se_binary_workload(binary)
 simulator = Simulator(board=board)
 simulator.run()
 ```
+
+The `MESITwoLevelCacheHierarchy` object allows us to define a Cache as well as its L1 and L2 size and set associativity. The `SingleChannelDDR4_2400` object represents a single 4 GB stick of DDR4 random memory access that runs at 2400 MHz. Our `SimpleProcessor` object represents a single-core CPU. We then map these components to the `SimpleBoard` object and set the clock frequency to 3GHz.
+
+Now that we have our hardware configured, we set the path to our `sum` binary file with the `BinaryResource` object and `set_se_binary_workload()` method. Finally, we instantiate a `Simulator` object with our `SimpleBoard` object and call the `run()` method to run the simulation.
 ### Execution
 The following command runs the simulation with the `simple.py` hardware configuration.
 ```bash
