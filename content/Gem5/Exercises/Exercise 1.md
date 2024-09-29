@@ -9,12 +9,12 @@ Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MI
 ### Source Code
 Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. [sum.c](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sumc) takes the sum of the elements within an array and prints it.
 ### Compilation
-The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
+The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code, and `-O0` disables compiler optimization.
 ```bash
  gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
-We can use [sum_commented.asm](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how it works.
+We can use [sum_commented.asm](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how the low-level instructions work.
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 ```bash
