@@ -15,5 +15,5 @@ I will be using Git as my version control system with GitHub as my platform, thi
 <img src="Gem5/images/github.png" alt="github" width="100"/>
 
 ## Exercises
-We'll be going through the following exercises to get a better understanding of gem5's capabilities.
+For this research topic, we'll be going through the following exercises.
 - [Exercise 1](Gem5/Exercises/Exercise-1)
