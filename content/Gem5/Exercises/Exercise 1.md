@@ -20,7 +20,7 @@ Then, we can use the following command to compile `sum.c` into a binary file tha
  >> gcc -fverbose-asm -O0 sum.c -o sum
 ```
 
-Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. We'll name this file [sum.asm](Gem5/Exercises/Related-Code#Exercise-1#sumasm)
+Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. We'll name this file [sum.asm](Gem5/Exercises/Related-Code#sumasm)
 ```bash
  >> objdump -d sum > sum.asm
 ```
