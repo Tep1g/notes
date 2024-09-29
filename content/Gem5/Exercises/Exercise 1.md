@@ -7,7 +7,7 @@ Before starting the exercise, we need to understand how gem5 actually works. The
 Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MIPS, POWER, and SPARC, it even supports the AMD VEGA GPU. The hardware components for the respective ISAs are written and compiled in C++, and a Python wrapper is used to configure and instantiate them during simulation.
 ## Program
 ### Source Code
-Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. [`sum.c`](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sumc) takes the sum of the elements within an array and prints it.
+Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. [sum.c](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sumc) takes the sum of the elements within an array and prints it.
 ### Compilation
 The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
 ```bash
