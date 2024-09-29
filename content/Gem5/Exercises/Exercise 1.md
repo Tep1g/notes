@@ -72,4 +72,4 @@ simulator.run()
 ```
 ### Execution
 #### System Diagram
-[The following diagram](Gem5/images/config.dot.pdf)is generated upon simulation execution.
+[The following diagram](Gem5/images/config.dot.pdf) is generated upon simulation execution.
