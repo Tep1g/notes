@@ -5,5 +5,5 @@ Welcome to my website!
 This is where I store my publicly accessible notes and research topics.
 
 # Topics
-- My [Digital Enterprise Research Paper](https://tep1g.github.io/notes/Digital-Enterprise-Research-Paper/)
-- My [Gem5 Research](https://tep1g.github.io/notes/Gem5/Introduction)
+- My [Digital Enterprise Research Paper](Digital-Enterprise-Research-Paper/)
+- My [Gem5 Research](Gem5/Introduction)
