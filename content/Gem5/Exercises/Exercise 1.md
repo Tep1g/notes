@@ -128,5 +128,26 @@ simulator = Simulator(board=board)
 simulator.run()
 ```
 ### Execution
-#### System Diagram
-[The following diagram](Gem5/images/config.dot.pdf) is generated upon simulation execution.
+The following command runs the simulation with the `simple.py` hardware configuration.
+```bash
+ >> build/X86/gem5.opt configs/simple.py
+```
+
+This results in the following output in `/m5out/stats.txt`
+#### stats.txt
+```txt
+---------- Begin Simulation Statistics ----------
+simSeconds                                   0.000225                       # Number of seconds simulated (Second)
+simTicks                                    224638137                       # Number of ticks simulated (Tick)
+finalTick                                   224638137                       # Number of ticks from beginning of simulation (restored from checkpoints and never reset) (Tick)
+simFreq                                  1000000000000                       # The number of ticks per simulated second ((Tick/Second))
+hostSeconds                                      0.26                       # Real time elapsed on the host (Second)
+hostTickRate                                860768264                       # The number of ticks simulated per host second (ticks/s) ((Tick/Second))
+hostMemory                                    4915616                       # Number of bytes of host memory used (Byte)
+simInsts                                        87380                       # Number of instructions simulated (Count)
+simOps                                         171352                       # Number of ops (including micro ops) simulated (Count)
+hostInstRate                                   334694                       # Simulator instruction rate (inst/s) ((Count/Second))
+hostOpRate                                     656317                       # Simulator op (including micro ops) rate (op/s) ((Count/Second))
+```
+
+[This diagram](Gem5/images/config.dot.pdf) is also generated upon simulation. This diagram visualizes the hardware that we configured in `simple.py`.
