@@ -20,14 +20,14 @@ Then, we can use the following command to compile `sum.c` into a binary file tha
  >> gcc -fverbose-asm -O0 sum.c -o sum
 ```
 
-Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. We'll name this file [sum.asm](Gem5/Exercises/Related-Code#sumasm)
+Additionally, we can use objdump to analyze the compiled binary file's assembly instructions by running the following command. We'll name this file [sum.asm](Gem5/Exercises/Related-Code#sumasm).
 ```bash
  >> objdump -d sum > sum.asm
 ```
 Notice how the `sum.asm` instructions are simpler than `sum_commented.asm`. I've added my own comments to this file.
 ## Simulation
 ### Configuration
-Since the gem5 python components are modularized, we can easily create our own configuration script. We'll name this script [simple.py](Gem5/Exercises/Related-Code#Exercise-1#simplepy)
+Since the gem5 python components are modularized, we can easily create our own configuration script. We'll name this script [simple.py](Gem5/Exercises/Related-Code#simplepy).
 ### Execution
 #### System Diagram
 [The following diagram](Gem5/images/config.dot.pdf) is generated upon simulation execution.
