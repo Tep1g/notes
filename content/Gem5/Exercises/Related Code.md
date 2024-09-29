@@ -1,7 +1,7 @@
 ## Exercise 1
 Code snippets referenced by [Exercise 1]()
 ### `sum.c`
-Referenced by the [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) in Program
+Referenced by [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) in Program
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +25,7 @@ int main() {
 }
 ```
 ### `sum_commented.asm`
-Referenced by the [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) in Program
+Referenced by [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) in Program
 ```asm
 	.file	"sum.c"
 # GNU C17 (Debian 12.2.0-14) version 12.2.0 (x86_64-linux-gnu)
