@@ -57,7 +57,7 @@ Alternatively, we can use objdump to analyze the compiled binary file's assembly
 ```bash
  >> objdump -d sum > sum.asm
 ```
-I've also added my own comments to this file. [The full sum.asm can be found here](Gem5/Exercises/Related-Code#sumasm).
+I've also added my own comments. [The full sum.asm can be found here](Gem5/Exercises/Related-Code#sumasm).
 #### sum.asm
 ```asm
 0000000000001139 <sum_arr>:
