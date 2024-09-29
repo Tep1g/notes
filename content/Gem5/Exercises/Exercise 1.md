@@ -6,37 +6,15 @@ Before starting the exercise, we need to understand how gem5 actually works. The
 
 Gem5 features simulation support for several ISAs including x86, ARM, RISC-V, MIPS, POWER, and SPARC, it even supports the AMD VEGA GPU. The hardware components for the respective ISAs are written and compiled in C++, and a Python wrapper is used to configure and instantiate them during simulation.
 ## Program
-Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. The following C program takes the sum of the elements within an array and prints it.
-### `sum.c`
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-
-static void sum_arr(uint8_t *arr, uint8_t arr_len, uint8_t *sum) {
-    for (int i = 0; i < arr_len; i++) {
-        *sum += arr[i];
-    }
-}
-
-int main() {
-    uint8_t arr[] = {6, 12, 1, 4};
-    uint8_t arr_len = sizeof(arr) / sizeof(uint8_t);
-
-    uint8_t sum;
-    sum_arr(arr, arr_len, &sum);
-    printf("%d", sum);
-
-    return 0;
-}
-```
+### Source Code
+Now that we understand how gem5 works, we need to create a program that our simulated hardware can actually run. [`sum.c`](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sumc) takes the sum of the elements within an array and prints it.
 ### Compilation
 The following command uses GCC to compile `sum.c` into an assembly file that we can read. The `-S` flag compiles it to assembly, `-fverbose-asm` generates comments that make it easier to understand the assembly code.  `-O0` disables compiler optimization.
 ```bash
  gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
-We can use [this commented assembly code](https://tep1g.github.io/notes/Gem5/Exercises/Related-Code#sum_commentedasm) to get an idea of how it works.
+We can use [this commented assembly code](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how it works.
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 ```bash
