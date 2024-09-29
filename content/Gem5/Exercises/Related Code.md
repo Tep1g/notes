@@ -1,7 +1,5 @@
 ## Exercise 1
-Code snippets referenced in [Exercise 1](https://notes.tepig.pro/Gem5/Exercises/Exercise-1)
 ### Program
-Code snippets referenced in the [Program](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#program) section.
 #### `sum.c`
 Referenced in the [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) section.
 ```c
