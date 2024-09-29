@@ -1,6 +1,8 @@
 ## Exercise 1
+### Program
+Code snippets referenced in the [Program](Gem5/Exercises/Exercise-1#program) section.
 #### `sum.c`
-Referenced in the [Source Code](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#source-code) section.
+Referenced in [Source Code](Gem5/Exercises/Exercise-1#source-code).
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +26,7 @@ int main() {
 }
 ```
 #### `sum_fverbose.asm`
-Referenced in the [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) section.
+Referenced in [Compilation](Gem5/Exercises/Exercise-1#compilation).
 ```asm
 	.file	"sum.c"
 # GNU C17 (Debian 12.2.0-14) version 12.2.0 (x86_64-linux-gnu)
@@ -129,7 +131,7 @@ main:
 
 ```
 #### `sum.asm`
-Referenced in the [Compilation](https://notes.tepig.pro/Gem5/Exercises/Exercise-1#compilation) section.
+Referenced in [Compilation](Gem5/Exercises/Exercise-1#compilation).
 ```asm
 
 sum:     file format elf64-x86-64
@@ -296,8 +298,10 @@ Disassembly of section .fini:
     11dc:	c3                   	ret
 
 ```
+### Simulation
+Code snippets referenced in the [Simulation](Gem5/Exercises/Exercise-1#simulation) section.
 #### `simple.py`
-Referenced in the [Configuration] section
+Referenced in [Configuration](Gem5/Exercises/Exercise-1#configuration).
 ```python
 from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.cachehierarchies.ruby.mesi_two_level_cache_hierarchy import (
