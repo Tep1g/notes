@@ -26,7 +26,8 @@ Additionally, we can use objdump to analyze the compiled binary file's assembly 
  >> objdump -d sum > sum.asm
 ```
 Notice how the `sum.asm` instructions are simpler than `sum_commented.asm`. I've added my own comments to this file.
-## Configuration
+## Simulation
+### Configuration
 Since the gem5 python components are modularized, we can easily create our own configuration script.
 ```python
 from gem5.components.boards.simple_board import SimpleBoard
@@ -69,6 +70,6 @@ board.set_se_binary_workload(binary)
 simulator = Simulator(board=board)
 simulator.run()
 ```
-
-## System Diagram
-[The following diagram](https://tep1g.github.io/notes/Gem5/images/config.dot.pdf)is generated upon simulation.
+### Execution
+#### System Diagram
+[The following diagram](Gem5/images/config.dot.pdf)is generated upon simulation execution.
