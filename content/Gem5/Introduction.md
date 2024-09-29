@@ -16,4 +16,4 @@ I will be using Git as my version control system with GitHub as my platform, thi
 
 ## Exercises
 We'll be going through the following exercises to get a better understanding of gem5's capabilities.
-- [Exercise 1](https://tep1g.github.io/notes/gem5/Exercises/Exercise-1)
+- [Exercise 1](https://tep1g.github.io/notes/Gem5/Exercises/Exercise-1)
