@@ -90,4 +90,4 @@ simulator.run()
 ```
 
 ## System Diagram
-[The following diagram](https://tep1g.github.io/notes/Gem5/images/config.dot.pdf/)is generated upon simulation.
+[The following diagram](https://tep1g.github.io/notes/Gem5/images/config.dot.pdf)is generated upon simulation.
