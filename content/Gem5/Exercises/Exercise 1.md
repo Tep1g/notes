@@ -69,19 +69,19 @@ I've also added my own comments to this file. [The full sum.asm can be found her
     1147:	88 45 e4             	mov    %al,-0x1c(%rbp)
     114a:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
     1151:	eb 24                	jmp    1177 <sum_arr+0x3e>
-    1153:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-    1157:	0f b6 08             	movzbl (%rax),%ecx
-    115a:	8b 45 fc             	mov    -0x4(%rbp),%eax
-    115d:	48 63 d0             	movslq %eax,%rdx
-    1160:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
-    1164:	48 01 d0             	add    %rdx,%rax
-    1167:	0f b6 00             	movzbl (%rax),%eax
-    116a:	8d 14 01             	lea    (%rcx,%rax,1),%edx
-    116d:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
-    1171:	88 10                	mov    %dl,(%rax)
-    1173:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
-    1177:	0f b6 45 e4          	movzbl -0x1c(%rbp),%eax
-    117b:	39 45 fc             	cmp    %eax,-0x4(%rbp)
+    1153:	48 8b 45 d8          	mov    -0x28(%rbp),%rax     # load sum pointer into tmp90
+    1157:	0f b6 08             	movzbl (%rax),%ecx          # copy value, that sum pointer points to, to ecx
+    115a:	8b 45 fc             	mov    -0x4(%rbp),%eax      # load i into tmp91 (array index)
+    115d:	48 63 d0             	movslq %eax,%rdx            # move and sign extend tmp91 to 64-bit reg
+    1160:	48 8b 45 e8          	mov    -0x18(%rbp),%rax     # load arr pointer into tmp92
+    1164:	48 01 d0             	add    %rdx,%rax            # offset the array pointer by the array index
+    1167:	0f b6 00             	movzbl (%rax),%eax          # load the array value to eax
+    116a:	8d 14 01             	lea    (%rcx,%rax,1),%edx   # add sum and arr[i] and store the result in _5 (ecx is rcx and eax is rax)
+    116d:	48 8b 45 d8          	mov    -0x28(%rbp),%rax     # load sum pointer into tmp93
+    1171:	88 10                	mov    %dl,(%rax)           # store _5 to sum address (dl is LSB of edx)
+    1173:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)      # increment i
+    1177:	0f b6 45 e4          	movzbl -0x1c(%rbp),%eax     # load arr_len to eax reg
+    117b:	39 45 fc             	cmp    %eax,-0x4(%rbp)      # skip loop if counter >= arr_len
     117e:	7c d3                	jl     1153 <sum_arr+0x1a>
     1180:	90                   	nop
     1181:	90                   	nop
