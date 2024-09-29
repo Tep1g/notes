@@ -14,7 +14,7 @@ The following command uses GCC to compile `sum.c` into an assembly file that we 
  gcc -S -fverbose-asm -O0 sum.c -o sum_commented.asm
 ```
 
-We can use [this commented assembly code](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how it works.
+We can use [sum_commented.asm](https://notes.tepig.pro/Gem5/Exercises/Related-Code#Exercise-1#sum_commentedasm) to get an idea of how it works.
 
 Then we can use the following command to compile `sum.c` into a binary file that the simulator can run.
 ```bash
