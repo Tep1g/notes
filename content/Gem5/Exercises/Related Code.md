@@ -300,13 +300,12 @@ Disassembly of section .fini:
 ```
 ### Simulation
 Code snippets referenced in the [Simulation](Gem5/Exercises/Exercise-1#simulation) section.
-#### simple.py
-Referenced in [Configuration](Gem5/Exercises/Exercise-1#configuration).
+#### simple_board.py
+Referenced in [Board Method](Gem5/Exercises/Exercise-1#system_method).
 ```python
 from gem5.components.boards.simple_board import SimpleBoard
-from gem5.components.cachehierarchies.ruby.mesi_two_level_cache_hierarchy import (
-    MESITwoLevelCacheHierarchy,
-)
+from gem5.components.cachehierarchies.classic.no_cache import NoCache
+from gem5.components.cachehierarchies.classic.private_l1_private_l2_cache_hierarchy import PrivateL1PrivateL2CacheHierarchy
 from gem5.components.memory.single_channel import SingleChannelDDR4_2400
 from gem5.components.processors.cpu_types import CPUTypes
 from gem5.components.processors.simple_processor import SimpleProcessor
@@ -314,18 +313,18 @@ from gem5.isas import ISA
 from gem5.resources.resource import BinaryResource
 from gem5.simulate.simulator import Simulator
 
-cache_hierarchy = MESITwoLevelCacheHierarchy(
-    l1d_size="16kB",
-    l1d_assoc=8,
-    l1i_size="16kB",
-    l1i_assoc=8,
-    l2_size="256kB",
-    l2_assoc=16,
-    num_l2_banks=1,
-)
+cache_enabled = (input("Configure board with cache?: ").lower() == "yes")
+if cache_enabled:
+    cache_hierarchy = PrivateL1PrivateL2CacheHierarchy(
+        l1d_size="16kB",
+        l1i_size="64kB",
+        l2_size="256kB",
+    )
+else:
+    cache_hierarchy = NoCache()
 
 # Give ourselves 4GB of the best DDR4 the simulator has to offer
-memory = SingleChannelDDR4_2400(size="4GB")
+memory = SingleChannelDDR4_2400(size="16GB")
 
 # X86 CPU
 processor = SimpleProcessor(cpu_type=CPUTypes.TIMING, isa=ISA.X86, num_cores=1)
@@ -342,4 +341,101 @@ board.set_se_binary_workload(binary)
 
 simulator = Simulator(board=board)
 simulator.run()
+```
+#### simple_system.py
+Referenced in [System Method](Gem5/Exercises/Exercise-1#system_method).
+```python
+import m5
+from m5.objects import *
+
+# Add the common scripts to our path
+m5.util.addToPath("../../")
+
+# import the caches which we made
+from learning_gem5.part1.caches import *
+
+# Create system
+system = System()
+
+# Create clock domain
+system.clk_domain = SrcClockDomain()
+system.clk_domain.clock = '3GHz'
+system.clk_domain.voltage_domain = VoltageDomain()
+
+# Set RAM size to 16GB
+system.mem_mode = 'timing'
+system.mem_ranges = [AddrRange('16GB')]
+
+# Create a simple x86 timing CPU core
+system.cpu = X86TimingSimpleCPU()
+
+# Create memory bus
+system.membus = SystemXBar()
+
+cache_enabled = (input("Configure system with cache?: ").lower() == "yes")
+if cache_enabled:
+    # Create L1 cache
+    system.cpu.icache = L1ICache()
+    system.cpu.dcache = L1DCache()
+
+    # Connect CPU to L1 cache
+    system.cpu.icache.connectCPU(system.cpu)
+    system.cpu.dcache.connectCPU(system.cpu)
+
+    # Create L2 bus
+    system.l2bus = L2XBar()
+
+    # Connect L2 bus to L1 cache
+    system.cpu.icache.connectBus(system.l2bus)
+    system.cpu.dcache.connectBus(system.l2bus)
+
+    # Create L2 cache and connect it to memory bus
+    system.l2cache = L2Cache()
+    system.l2cache.connectCPUSideBus(system.l2bus)
+    system.l2cache.connectMemSideBus(system.membus)
+else:
+    # Connect CPU cache ports to memory bus ports since we aren't using cache
+    system.cpu.icache_port = system.membus.cpu_side_ports
+    system.cpu.dcache_port = system.membus.cpu_side_ports
+
+# Create interrupt controller
+system.cpu.createInterruptController()
+
+# Connect the parellel I/O ports
+system.cpu.interrupts[0].pio = system.membus.mem_side_ports
+system.cpu.interrupts[0].int_requestor = system.membus.cpu_side_ports
+system.cpu.interrupts[0].int_responder = system.membus.mem_side_ports
+
+# Connect system port to memory bus to allow for reading and writing to memory
+system.system_port = system.membus.cpu_side_ports
+
+# Create memory controller and DRAM configuration
+system.mem_ctrl = MemCtrl()
+system.mem_ctrl.dram = DDR4_2400_8x8()
+system.mem_ctrl.dram.range = system.mem_ranges[0]
+system.mem_ctrl.port = system.membus.mem_side_ports
+
+# Set path to binary file
+binary = 'tests/test-progs/sum/bin/x86/linux/sum'
+
+# for gem5 V21 and beyond
+system.workload = SEWorkload.init_compatible(binary)
+
+# Create process with specified binary path
+process = Process()
+process.cmd = [binary]
+system.cpu.workload = process
+system.cpu.createThreads()
+
+# Instantiate root system
+root = Root(full_system = False, system = system)
+m5.instantiate()
+
+# Begin simulation
+print("Beginning simulation!")
+exit_event = m5.simulate()
+
+# Inspect system state
+print('Exiting @ tick {} because {}'
+      .format(m5.curTick(), exit_event.getCause()))
 ```
