@@ -205,7 +205,7 @@ print('Exiting @ tick {} because {}'
       .format(m5.curTick(), exit_event.getCause()))
 ```
 #### Execution
-The following command runs the simulation with the `simple.py` hardware configuration.
+The following command runs the simulation with the `simple_system.py` hardware configuration.
 ```bash
  >> build/X86/gem5.opt configs/exercises/exercise-1/simple_system.py
 ```
@@ -282,7 +282,7 @@ simulator.run()
 ```
 Finally, we create a `Simulator` object with our `SimpleBoard` object and call the `run()` method to start the simulation.
 #### Execution
-The following command runs the simulation with the `simple.py` hardware configuration.
+The following command runs the simulation with the `simple_board.py` hardware configuration.
 ```bash
  >> build/X86/gem5.opt configs/exercises/exercise-1/simple_board.py
 ```
