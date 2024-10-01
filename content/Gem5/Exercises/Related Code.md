@@ -1,6 +1,6 @@
 ## Exercise 1
 ### Program
-Code snippets referenced in the [Program](Gem5/Exercises/Exercise-1#program) section.
+Programs referenced in the [Program](Gem5/Exercises/Exercise-1#program) section.
 #### sum.c
 Referenced in [Source Code](Gem5/Exercises/Exercise-1#source-code).
 ```c
@@ -299,7 +299,7 @@ Disassembly of section .fini:
 
 ```
 ### Simulation
-Code snippets referenced in the [Simulation](Gem5/Exercises/Exercise-1#simulation) section.
+Programs referenced in the [Simulation](Gem5/Exercises/Exercise-1#simulation) section.
 #### simple_board.py
 Referenced in [Board Method](Gem5/Exercises/Exercise-1#system_method).
 ```python
