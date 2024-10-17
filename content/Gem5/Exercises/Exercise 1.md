@@ -1,3 +1,5 @@
+## Purpose
+In this exercise, we'll be configuring a gem5 syscall emulator and running a simple program on it.
 ## Background Info
 Before starting the exercise, we need to understand how gem5 actually works. The following questions are raised at this point:
 - What architectures does gem5 simulate?
