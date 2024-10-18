@@ -17,3 +17,4 @@ I will be using Git as my version control system with GitHub as my platform, thi
 ## Exercises
 For this research topic, we'll be going through the following exercises.
 - [Exercise 1](Gem5/Exercises/Exercise-1)
+- [Exercise 2](Gem5/Exercises/Exercise-2)
