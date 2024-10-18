@@ -59,17 +59,13 @@ Further, we can use the following `objdump` command to get the program memory ad
 ## Simulation
 ### Configuration
 We can copy most of the `simple_system.py` configuration script from exercise 1 for this simulation.
-### Debug Messages
-Gem5 supports optional debug messages, these messages can be enabled as flags in the same terminal command that runs the simulation.
-
-Looking in the `doBurstAccess` method of the `DRAMInterface` class within the `dram_interface.cc` module, we see the following print statement.
-#### dram_interface.cc
-```c++
-DPRINTF(DRAM, "Timing access to addr %#x, rank/bank/row %d %d %d\n",
-		mem_pkt->addr, mem_pkt->rank, mem_pkt->bank, mem_pkt->row);
-```
 ### Execution
-Since the debug messages will output such an insane amount of text to the terminal, we'll need to use the following set of commands to log everything displayed in the terminal. This will create a roughly 35 MB `typescript` file.
+Gem5 supports optional debug messages, these messages can be enabled as flags in the same terminal command that runs the simulation. To enable debug messages for the Cache, DRAM, and CPU, we'll have to add the following argument when running the simulation.
+```bash
+--debug-flags=DRAM,Exec,CacheVerbose
+```
+
+However, since the debug messages will output such an insane amount of text to the terminal, we'll need to use the following set of commands to log everything displayed in the terminal. This will create a roughly 35 MB `typescript` file.
 ```bash
  >> script
  >> build/X86/gem5.opt --debug-flags=DRAM,Exec,CacheVerbose configs/exercises/exercise-2/simple_system.py
@@ -179,4 +175,85 @@ Within the header file, we can look at the method declaration's docstring for mo
     virtual void satisfyRequest(PacketPtr pkt, CacheBlk *blk,
                                 bool deferred_response = false,
                                 bool pending_downgrade = false);
+```
+
+#### DRAM to Cache to CPU
+Looking in the `doBurstAccess` method of the `DRAMInterface` class within the `dram_interface.cc` module, we see the following `DPRINTF()` statement.
+#### dram_interface.cc
+```c++
+DRAMInterface::doBurstAccess(MemPacket* mem_pkt, Tick next_burst_at,
+                             const std::vector<MemPacketQueue>& queue)
+{
+...
+DPRINTF(DRAM, "Timing access to addr %#x, rank/bank/row %d %d %d\n",
+		mem_pkt->addr, mem_pkt->rank, mem_pkt->bank, mem_pkt->row);
+```
+
+By filtering the `typescript` log file with the keywords in this `DPRINTF()` statement, we're able to find the following extensive log messages. While it's not clear what part of the C program these messages correspond to, the messages at least tell us the nature of the memory transfer so let's break them down.
+#### typescript
+```
+240224535: system.cpu.icache: access for ReadReq [93040:93047] IF miss
+240225201: system.cpu.icache: sendMSHRQueuePacket: MSHR ReadReq [93040:93047] IF
+240225201: system.cpu.icache: createMissPacket: created ReadSharedReq [93040:9307f] IF from ReadReq [93040:93047] IF
+240225201: system.l2cache: access for ReadSharedReq [93040:9307f] IF miss
+240232194: system.l2cache: sendMSHRQueuePacket: MSHR ReadSharedReq [93040:9307f] IF
+240232194: system.l2cache: createMissPacket: created ReadSharedReq [93040:9307f] IF from ReadSharedReq [93040:9307f] IF
+240232194: system.mem_ctrl.dram: Address: 0x93040 Rank 0 Bank 9 Row 2
+240232194: system.mem_ctrl.dram: Timing access to addr 0x93040, rank/bank/row 0 9 2
+240232194: system.mem_ctrl.dram: Schedule RD/WR burst at tick 240232194
+240249686: system.mem_ctrl.dram: number of read entries for rank 0 is 0
+240273153: system.l2cache: recvTimingResp: Handling response ReadResp [93040:9307f] IF
+240273153: system.l2cache: Block for addr 0x93040 being updated in Cache
+240273153: system.l2cache: Block addr 0x93040 (ns) moving from  to state: 6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x12 secure: 0 valid: 1 | set: 0xc1 way: 0x7
+240273153: system.l2cache: recvTimingResp: Leaving with ReadResp [93040:9307f] IF
+240280146: system.cpu.icache: recvTimingResp: Handling response ReadResp [93040:9307f] IF
+240280146: system.cpu.icache: Block for addr 0x93040 being updated in Cache
+240280146: system.cpu.icache: Create CleanEvict CleanEvict [1040:107f]
+240280146: system.cpu.icache: Block addr 0x93040 (ns) moving from  to state: ffdc49f6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x49 secure: 0 valid: 1 | set: 0x41 way: 0x1
+240280146: system.cpu.icache: recvTimingResp: Leaving with ReadResp [93040:9307f] IF
+240280812: system.cpu.icache: sendWriteQueuePacket: write CleanEvict [1040:107f]
+240280812: system.l2cache: access for CleanEvict [1040:107f] hit state: 6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0 secure: 0 valid: 1 | set: 0x41 way: 0x2
+240280812: system.l2cache: handleTimingReqHit satisfied CleanEvict [1040:107f], no response needed
+```
+
+The reference to the `icache` object and the `IF` cache miss tell us that a cache miss occurred when fetching instructions from the l1 cache. Additionally, we see that a `ReadReq` (read request) packet was presumably created to fetch these instructions from the lower level l2 cache.
+```
+240224535: system.cpu.icache: access for ReadReq [93040:93047] IF miss
+240225201: system.cpu.icache: sendMSHRQueuePacket: MSHR ReadReq [93040:93047] IF
+240225201: system.cpu.icache: createMissPacket: created ReadSharedReq [93040:9307f] IF from ReadReq [93040:93047] IF
+```
+
+These debug messages tell us that the l2 cache received the l1 cache's request packet and it also resulted in a cache miss. Similarly to the l1 cache, the l2 cache creates an read request packet that it then sends to DRAM.
+```
+240225201: system.l2cache: access for ReadSharedReq [93040:9307f] IF miss
+240232194: system.l2cache: sendMSHRQueuePacket: MSHR ReadSharedReq [93040:9307f] IF
+240232194: system.l2cache: createMissPacket: created ReadSharedReq [93040:9307f] IF from ReadSharedReq [93040:9307f] IF
+```
+
+We then see that the appropriate DRAM address is being accessed in order to fetch the instructions that were originally requested at the top of the memory heirarchy.
+```
+240232194: system.mem_ctrl.dram: Address: 0x93040 Rank 0 Bank 9 Row 2
+240232194: system.mem_ctrl.dram: Timing access to addr 0x93040, rank/bank/row 0 9 2
+240232194: system.mem_ctrl.dram: Schedule RD/WR burst at tick 240232194
+240249686: system.mem_ctrl.dram: number of read entries for rank 0 is 0
+```
+
+After the DRAM sends back the requested instructions, we see that the l2 cache updates its corresponding cache block and propagates these fetched instructions up to the l1 cache.
+```
+240273153: system.l2cache: recvTimingResp: Handling response ReadResp [93040:9307f] IF
+240273153: system.l2cache: Block for addr 0x93040 being updated in Cache
+240273153: system.l2cache: Block addr 0x93040 (ns) moving from  to state: 6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x12 secure: 0 valid: 1 | set: 0xc1 way: 0x7
+240273153: system.l2cache: recvTimingResp: Leaving with ReadResp [93040:9307f] IF
+```
+
+Finally, the l1 cache receives the fetched instructions from the l2 cache and performs a cache eviction in order to store these instructions.
+```
+240280146: system.cpu.icache: recvTimingResp: Handling response ReadResp [93040:9307f] IF
+240280146: system.cpu.icache: Block for addr 0x93040 being updated in Cache
+240280146: system.cpu.icache: Create CleanEvict CleanEvict [1040:107f]
+240280146: system.cpu.icache: Block addr 0x93040 (ns) moving from  to state: ffdc49f6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x49 secure: 0 valid: 1 | set: 0x41 way: 0x1
+240280146: system.cpu.icache: recvTimingResp: Leaving with ReadResp [93040:9307f] IF
+240280812: system.cpu.icache: sendWriteQueuePacket: write CleanEvict [1040:107f]
+240280812: system.l2cache: access for CleanEvict [1040:107f] hit state: 6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0 secure: 0 valid: 1 | set: 0x41 way: 0x2
+240280812: system.l2cache: handleTimingReqHit satisfied CleanEvict [1040:107f], no response needed
 ```
