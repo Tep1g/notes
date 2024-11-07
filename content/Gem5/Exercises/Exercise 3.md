@@ -3,7 +3,7 @@ In this exercise, we'll be simulating the parallel execution of a multithreaded 
 
 ## Program
 ### Source Code
-This program will have two threads summing the values within a two dimensional array of random numbers. The size of this array is set to 2500 4 byte integers, this translates to 10KB.
+This program will have two threads summing the values within a two dimensional array of random numbers. The size of this array is set to 2500 4 byte integers, this amounts to 10KB.
 #### sum-3.c
 ```c
 #include <pthread.h>
@@ -76,6 +76,13 @@ int main() {
 }
 ```
 
+It's important to point out line 64.
+```c
+	// Execute the last thread with this thread context to appease SE mode
+	sum_by_row_major(matrix);
+```
+
+Syscall Emulation mode only allows n-1 threads to be executed where n is the number of cores. This is because `main()` has to be constantly running on one of the cores. To address this problem, we can execute our "thread" in `main()`.
 ### Compilation
 To speed up the compilation process, we can create the following Makefile script.
 ```makefile
@@ -202,6 +209,7 @@ exit_event = m5.simulate()
 # Inspect system state
 print('Exiting @ tick {} because {}'
       .format(m5.curTick(), exit_event.getCause()))
+
 ```
 
 ### Execution
@@ -219,3 +227,20 @@ Sum: 3204380660
 Column major thread finished in 139 microseconds
 Sum: 3204380660
 ```
+
+To record the cache hierarchy debug messages, we run the following set of commands.
+```bash
+ >> script
+ >> build/X86/gem5.opt --debug-flags=DRAM,Exec,Cache configs/exercises/exercise-3/multi_core_system.py --l1d_size='2kB' --l2_size='4kB'
+ >> exit
+```
+
+By reading the debug messages, we can check to see if the threads are actually running in parallel.
+```
+728124813: system.cpu1: T0 : 0x11fb @sum_by_row_major+114. 2 :   ADD_M_I : add   t1d, t1d, t2d : IntAlu :  D=0x0000000000000000
+728124813: system.cpu1.dcache: access for WriteReq [a3ec4:a3ec7] hit state: 6d61662f (M) writable: 1 readable: 1 dirty: 1 prefetched: 0 | tag: 0x28f secure: 0 valid: 1 | set: 0xb way: 0
+
+728124813: system.cpu0: T0 : 0x128c @sum_by_column_major+94    : sal	0x2 
+```
+
+The cores are labeled as cpus. Looking closely, we can see that `cpu1` is executing the `sum_by_row_major` thread and `cpu0` is executing the `sum_by_column_major` thread. Additionally, the debug messages tell us that these specific debug messages occur at the same tick `728124813` (same point in time). This tells us that each core and thread is actually running in parallel as we would expect.
