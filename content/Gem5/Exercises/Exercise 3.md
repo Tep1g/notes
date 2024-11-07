@@ -244,3 +244,50 @@ By reading the debug messages, we can check to see if the threads are actually r
 ```
 
 The cores are labeled as cpus. Looking closely, we can see that `cpu1` is executing the `sum_by_row_major` thread and `cpu0` is executing the `sum_by_column_major` thread. Additionally, the debug messages tell us that these specific debug messages occur at the same tick `728124813` (same point in time). This tells us that each core and thread is actually running in parallel as we would expect.
+
+Since our L1 and L2 cache are smaller than the heap's allocated memory size, we also expect to see some evictions within our hierarchy.
+
+For this instruction, we see it trying to fetch data within the L1 data cache and incurring a cache miss. It then creates a read request to look for the desired data in the L2 cache.
+```
+728595675: system.cpu0: T0 : 0x1290 @sum_by_column_major+98. 0 :   ADD_R_R : add   rax, rax, rdx : IntAlu :  D=0x0000000000000000
+728595675: system.cpu0.icache: access for ReadReq [1290:1297] IF hit state: c4ab85b6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0 secure: 0 valid: 1 | set: 0x4a way: 0
+728596341: system.cpu0.dcache: access for ReadReq [8ebbc:8ebbf] miss
+728597007: system.cpu0.dcache: sendMSHRQueuePacket: MSHR ReadReq [8ebbc:8ebbf]
+728597007: system.cpu0.dcache: createMissPacket: created ReadSharedReq [8eb80:8ebbf] from ReadReq [8ebbc:8ebbf]
+```
+
+The L2 cache receives the read request and it also incurs a cache miss so it creates a read request to look for the desired data in DRAM.
+```
+728597007: system.l2cache0: access for ReadSharedReq [8eb80:8ebbf] miss
+728604000: system.l2cache0: sendMSHRQueuePacket: MSHR ReadSharedReq [8eb80:8ebbf]
+728604000: system.l2cache0: createMissPacket: created ReadSharedReq [8eb80:8ebbf] from ReadSharedReq [8eb80:8ebbf]
+```
+
+The DRAM then receives the read request, fetches the data, and propagates it back up to the L2 cache through a read response.
+```
+728604000: system.mem_ctrl.dram: Address: 0x8eb80 Rank 0 Bank 7 Row 2
+728604000: system.mem_ctrl.dram: Timing access to addr 0x8eb80, rank/bank/row 0 7 2
+728604000: system.mem_ctrl.dram: Schedule RD/WR burst at tick 728604000
+```
+
+Once the L2 cache receives the DRAM's response, it proceeds to store the data for that address by evicting a cache block that already exists. The data is then propagated up to the L1 cache.
+```
+728644959: system.l2cache0: recvTimingResp: Handling response ReadResp [8eb80:8ebbf]
+728644959: system.l2cache0: Block for addr 0x8eb80 being updated in Cache
+728644959: system.l2cache0: Create CleanEvict CleanEvict [8bd80:8bdbf]
+728644959: system.l2cache0: Block addr 0x8eb80 (ns) moving from  to state: ef6795b6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x475 secure: 0 valid: 1 | set: 0x6 way: 0x2
+```
+
+Once the L1 cache receives the L2 cache's response, it proceeds to do the same and store the data for that address by evicting a pre-existing cache block.
+```
+728651952: system.cpu0.dcache: recvTimingResp: Handling response ReadResp [8eb80:8ebbf]
+728651952: system.cpu0.dcache: Block for addr 0x8eb80 being updated in Cache
+728651952: system.cpu0.dcache: Create CleanEvict CleanEvict [8e380:8e3bf]
+728651952: system.cpu0.dcache: Block addr 0x8eb80 (ns) moving from  to state: 6 (E) writable: 1 readable: 1 dirty: 0 prefetched: 0 | tag: 0x23a secure: 0 valid: 1 | set: 0xe way: 0x1
+```
+
+We then see these same cache block get evicted later in the program.
+```
+730981953: system.l2cache0: Create CleanEvict CleanEvict [8eb80:8ebbf]
+730988946: system.cpu0.dcache: Create CleanEvict CleanEvict [8eb80:8ebbf]
+```
