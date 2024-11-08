@@ -228,7 +228,7 @@ Column major thread finished in 139 microseconds
 Sum: 3204380660
 ```
 
-To record the cache hierarchy debug messages, we run the following set of commands.
+To set the L1 and L2 cache sizes and record debug messages, we run the following set of commands.
 ```bash
  >> script
  >> build/X86/gem5.opt --debug-flags=DRAM,Exec,Cache configs/exercises/exercise-3/multi_core_system.py --l1d_size='2kB' --l2_size='4kB'
