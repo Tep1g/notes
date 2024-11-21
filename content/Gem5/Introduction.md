@@ -19,3 +19,4 @@ For this research topic, we'll be going through the following exercises.
 - [Exercise 1](Gem5/Exercises/Exercise-1)
 - [Exercise 2](Gem5/Exercises/Exercise-2)
 - [Exercise 3](Gem5/Exercises/Exercise-3)
+- [Exercise 4](Gem5/Exercises/Exercise-4)

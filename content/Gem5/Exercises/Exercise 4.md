@@ -1,0 +1,8 @@
+## Purpose
+The purpose of this exercise will be to address some of the issues with the prior exercise (3). One issue is that the execution of the row major function in main() causes a couple of issues. The primary issue is that it makes it difficult to analyze the stats. Another issue is that it causes the row major function to have potential access to precached data before the execution of that "thread" is even invoked. The solution to this problem is to add a third core so that each thread gets executed independently of main().
+
+Another issue is that the simplicity in the summing algorithm makes it difficult to draw a clear distinction between the row major and column major threads when it comes to the benchmarking speeds. The solution here will be to randomize the row/column that each both threads index for.
+
+Another issue is associating memory transfers to specific instructions. The solution will be to add a custom debug message that prints the program counter (PC) within the packet of the top level (L1) memory request.
+
+A final issue is that the use of a shared pointer to the same matrix's address means that the threads aren't fighting for memory space when the L2 cache is shared between them. The solution here will be to have two copies of the same matrix, each with their own location in DRAM, so that the threads are forced to treat each other's matrix values as irrelevant and evict it.
