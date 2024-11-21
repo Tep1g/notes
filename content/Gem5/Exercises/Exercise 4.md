@@ -5,4 +5,4 @@ Another issue is that the simplicity in the summing algorithm makes it difficult
 
 Another issue is associating memory transfers to specific instructions. The solution will be to add a custom debug message that prints the program counter (PC) within the packet of the top level (L1) memory request.
 
-A final issue is that the use of a shared pointer to the same matrix's address means that the threads aren't fighting for memory space when the L2 cache is shared between them. The solution here will be to have two copies of the same matrix, each with their own location in DRAM, so that the threads are forced to treat each other's matrix values as irrelevant and evict it.
+A final issue is that the use of a shared pointer to the same matrix's memory address means that the threads aren't fighting for space when the L2 cache is shared between them. The solution here will be to have two copies of the same matrix, each with their own location in DRAM, so that the threads are forced to treat each other's matrix values as irrelevant and evict it.
