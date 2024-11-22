@@ -118,7 +118,7 @@ int main() {
 }
 ```
 ### Compilation
-As I was writing `sum-4.c`, I noticed an interesting issue. I had previously written and compiled the program in such a way that both threads were accessing the same matrix. This was its own issue as previously discussed. However, when I updated the program to fix this issue (by having a duplicate matrix), my VSCode git extension was showing that the compiled binary didn't change. This bug was actually a feature of the compiler optimizing my program, and effectively nullifying my changes, as I had forgotten to add the `O0` flag when compiling. By running the following Makefile script with compiler optimization disabled, my git extension showed that the `sum-4` binary had changed.
+As I was wrote `sum-4.c`, I noticed an interesting issue. I had previously written and compiled the program in such a way where both threads were accessing the same matrix. This was its own issue as previously discussed. However, when I updated the program to fix this issue (by having a duplicate matrix), my VSCode git extension was showing that the compiled binary didn't change. This bug was actually a feature of the compiler optimizing my program, and effectively nullifying my changes, as I had forgotten to add the `O0` flag when compiling. By running the following Makefile script with compiler optimization disabled, my git extension showed that the `sum-4` binary had changed.
 ```makefile
 ../bin/x86/linux/sum-4: sum-4.c
 	gcc -o ../bin/x86/linux/sum-4 -O0 sum-4.c -pthread
