@@ -6,7 +6,6 @@ Another issue is that the simplicity in the summing algorithm makes it difficult
 Another issue is associating memory transfers to specific instructions. The solution will be to add a custom debug message that prints the program counter (PC) within the packet of the top level (L1) memory request.
 
 A final issue is that the use of a shared pointer to the same matrix's memory address means that the threads aren't fighting for space when the L2 cache is shared between them. The solution here will be to have two copies of the same matrix, each with their own location in DRAM, so that the threads are forced to treat each other's matrix values as irrelevant and evict it.
-
 ## Program
 ### Source Code
 The first key difference between `sum-4.c` and `sum-3.c` (from the last exercise) is that this time the row and column indexes, within the summing threads, are shuffled. The second key difference is that both functions are assigned their own respective thread rather than one of them being executed in `main()`. The third distinction is that, despite both matrices being identical in data, the threads are not accessing the same matrix.
@@ -124,3 +123,52 @@ As I was writing `sum-4.c`, I noticed an interesting issue. I had previously wri
 ../bin/x86/linux/sum-4: sum-4.c
 	gcc -o ../bin/x86/linux/sum-4 -O0 sum-4.c -pthread
 ```
+
+We can then run this Makefile using the `make` command
+```bash
+ >> make
+```
+
+## Simulation
+### Custom Debug Message
+We add the following `DPRINT` statement to the `access()` method of the `BaseCache` class in `base.cc`. This way, every cache level prints the PC of the associated read request. 
+
+We call the `getPC()` method of the request member of the packet object to obtain the PC. Note the `if` statement conditional, this is to ensure that the simulation doesn't crash if the `access()` method is called with a packet request that doesn't contain a PC.
+#### base.cc
+```cpp
+    if (pkt->req->hasPC()) {
+        DPRINTF(Cache, "PC %x\n", pkt->req->getPC());
+    }
+```
+### Configuration
+The only difference between this exercise's configuration script and the one from exercise 3 is the system's number of cores.
+```py
+# Define number of cores
+NUM_CORES = 3
+```
+
+### Execution
+We can run the simulation with a shared L2 cache using the following command.
+```bash
+ >> build/X86/gem5.opt configs/exercises/exercise-4/multi_core_system.py --l1d_size='2kB' --l2_size='8kB' --shared_l2
+```
+
+We then get the following output which shows us that our program was successfully executed.
+```txt
+Column major thread started
+Row major thread started
+Row major thread finished in 81 microseconds
+Sum: 61250
+Column major thread finished in 152 microseconds
+Sum: 61250
+Exiting @ tick 704537091 because exiting with last active thread context
+```
+
+To generate and log debug messages in a `typescript` file, we'll run the following commands.
+```bash
+ >> script
+ >> build/X86/gem5.opt --debug-flags=DRAM,Exec,Cache configs/exercises/exercise-4/multi_core_system.py --l1d_size='2kB' --l2_size='8kB' --shared_l2
+ >> exit
+```
+
+### Analysis
