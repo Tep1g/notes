@@ -224,6 +224,7 @@ We can then trace the debug messages for this specific instruction and can clear
 594071334: system.cpu1: T0 : 0x140f @sum_by_column_major+130. 0 :   MOV_R_M : ld   eax, DS:[rax] : MemRead :  D=0x0000000000000017 A=0x959c
 ```
 
+
 The debug messages show us that cpu1 executes the column major thread and cpu2 executes the row major thread so these are these are the cores we're interested in when digging through `stats.txt`.
 
 The following table gives us the stats for 4 different configurations of the simulation. As we would expect, using an L2 Cache consistently slows down execution. Additionally, a l1d and l2 cache size result in less cache misses and faster execution. 
