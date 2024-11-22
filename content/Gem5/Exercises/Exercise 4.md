@@ -8,7 +8,7 @@ Another issue is associating memory transfers to specific instructions. The solu
 A final issue is that the use of a shared pointer to the same matrix's memory address means that the threads aren't fighting for space when the L2 cache is shared between them. The solution here will be to have two copies of the same matrix, each with their own location in DRAM, so that the threads are forced to treat each other's matrix values as irrelevant and evict it.
 ## Program
 ### Source Code
-The first key difference between `sum-4.c` and `sum-3.c` (from the last exercise) is that this time the row and column indexes, within the summing threads, are shuffled. The second key difference is that both functions are assigned their own respective thread rather than one of them being executed in `main()`. The third distinction is that, despite both matrices being identical in data, the threads are not accessing the same matrix.
+The first key difference between `sum-4.c` and `sum-3.c` (from the last exercise) is that this time the row and column indexes, within the summing threads, are shuffled. The second key difference is that both functions are assigned their own respective thread rather than one of them being executed in `main()`. Another distinction is that, despite both matrices being identical in data, the threads are not accessing the same matrix. The final difference is that the indexes are shuffled for each thread.
 ### sum-4.c
 ```c
 #include <pthread.h>
