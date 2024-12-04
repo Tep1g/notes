@@ -1,5 +1,5 @@
 ## Purpose
-This exercise will demonstrate the execution of gem5's m5 ops. m5 ops are magic instructions that can be executed by the emulated system. These instructions perform unique actions such as switching between cores, resetting stats, and pausing a program and creating a checkpoint. When called, checkpoints capture the state of the system and the execution of the program, this allows for system analysis at specific points in time. Additionally, execution can be resumed from specific checkpoints which makes them handy for executing long and slow programs.
+This exercise will demonstrate the execution of gem5's m5 ops. m5 ops are magic instructions that can be executed by the emulated system. These instructions perform unique actions such as switching between cores, resetting stats, and pausing a program and creating a checkpoint. When called, checkpoints capture the state of the system and the execution of the program, this allows for system analysis at specific points in time. Additionally, execution can be resumed from specific checkpoints which makes them handy for long and slow programs.
 
 ## Program
 ### Source Code
