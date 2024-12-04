@@ -1,6 +1,5 @@
 ## Purpose
-This exercise will demonstrate the execution of gem5's m5 ops. m5 ops are magic instructions that can be executed by the emulated system. These instructions perform unique actions such as switching between cores, resetting stats, and pausing a program and creating a checkpoint. When called, checkpoints capture the state of the system and the execution of the program, this allows for system analysis at specific points in time. Additionally, execution can be resumed from specific checkpoints which makes them handy for long and slow programs.
-
+This exercise will demonstrate the execution of gem5's m5 ops. m5 ops are magic instructions that can be executed by the emulated system. These instructions perform unique actions such as switching between cores, resetting stats, and creating a checkpoints. When called, a checkpoint stops the execution of a program and captures the state of the system, this allows for analysis to be done at specific points in the program. Additionally, execution can be later resumed from specific checkpoints which makes them handy for long and slow programs.
 ## Program
 ### Source Code
 The following program is rather simple, it instantiates a couple of floating point variables. The code is split into 3 sections: variable initialization, a sum operation, and a multiplication operation.
@@ -56,12 +55,28 @@ clean:
 	rm -f $(OBJECTS)
 ```
 
+The following command can then be run, within the `checkpoint/src` directory, for compilation.
+```bash
+ >> make
+```
+
 Once compiled, `objdump` can be used to get the program counter addresses of each instruction.
 ```bash
  >> objdump -d checkpoint > checkpoint-with-pcs
 ```
+
+Looking at the `objdump` instructions reveals the PC address in question, `0x11e8`. This address is important as its associated instruction is the m5 magic checkpoint instruction.
+#### snippet of checkpoint-with-pcs.asm
+```asm
+    116e:	bf 00 00 00 00       	mov    $0x0,%edi
+    1173:	e8 70 00 00 00       	call   11e8 <m5_checkpoint>
+    1178:	be 00 00 00 00       	mov    $0x0,%esi
+    117d:   bf 00 00 00 00          mov    $0x0,%edi
+```
 ## Simulation
 ### Configuration
+
+Despite being a mostly standard single core system, the following configuration script has a couple of quirks. The script accepts arguments for creating and loading the singular checkpoint from `checkpoint.c`. It must also be noted that this script uses an `AtomicSimpleCPU` instead of a `TimingSimpleCPU` as the latter is incompatible with checkpoints.
 #### simple_system.py
 ```python
 import argparse
@@ -166,4 +181,35 @@ print('Exiting @ tick {} because {}'
 
 if options.save_checkpoint:
       m5.checkpoint("checkpoint-dir")
+```
+
+### Simulation
+The following set of commands can be run to record the CPU's executed instructions up until the checkpoint is called.
+```bash
+ >> script
+ >> build/X86/gem5.opt --debug-flags=Exec configs/exercises/exercise-4/simple_system.py --save_checkpoint
+ >> exit
+```
+
+The following commands generate a `typescript` file that logs every instruction executed by the CPU. As expected, the PC of the final `main()` instruction executed by the core is `0x11e8`.
+### Snippet of typescript log file
+```
+63084852: system.cpu: T0 : 0x1173 @main+74. 4 :   CALL_NEAR_I : wrip   t7, t1 : IntAlu : 
+63085185: system.cpu: T0 : 0x11e8 @m5_checkpoint    :   gem5Op                   : IntAlu :  D=0x0000000000000000
+Exiting @ tick 63085185 because checkpoint
+```
+
+The following set of commands can be run to record the CPU's executed instructions after the checkpoint is called.
+```bash
+ >> script
+ >> build/X86/gem5.opt --debug-flags=Exec configs/exercises/exercise-4/simple_system.py --run_from_checkpoint
+ >> exit
+```
+
+As expected, the program picks up where the checkpoint left off, at the PC `0x1178`.
+### Snippet of typescript log file
+```
+63086517: system.cpu: T0 : 0x1178 @main+79    : mov	esi, 0                
+63086517: system.cpu: T0 : 0x1178 @main+79. 0 :   MOV_R_I : limm   esi, 0  : IntAlu :  D=0x0000000000000000
+63087183: system.cpu: T0 : 0x117d @main+84    : mov	edi, 0
 ```
