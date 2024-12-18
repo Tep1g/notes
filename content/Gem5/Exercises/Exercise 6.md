@@ -144,7 +144,7 @@ The following set of commands can be run to record the simulation's debug messag
  >> exit
 ```
 
-This debug message shows the floating point value, in the array, being read (FloatMemRead). D=0x43790000 is the IEEE 754 representation of 249.0, which is the last value stored in the array. This value is retrieved from the L1 cache.
+This debug message shows the floating point value, in the array, being read (FloatMemRead). D=0x43790000 is the IEEE 754 single precision floating point representation of 249.0, which is the last value stored in the array. This value is retrieved from the L1 cache.
 ```
 220564215: system.cpu: T0 : 0x11ba @main+113. 2 :   MOVSS_XMM_M : ldfp   %xmm0_low, DS:[rax] : FloatMemRead :  D=0x0000000043790000 A=0x5684
 220564215: system.cpu.dcache: access for ReadReq [8b684:8b687] hit state: e (M) writable: 1 readable: 1 dirty: 1 prefetched: 0 | tag: 0x11 secure: 0 valid: 1 | set: 0xda way: 0x1
