@@ -2,7 +2,7 @@
 This research exercise will examine how floating point math is handled on the instruction level and on the emulation level.
 ## Program
 ### Source Code
-The following program allocates the floating point values, 0.0 to 249.0, to the heap and sums them up.
+The following program allocates the values, 0 to 249 as floating point values, to the heap and sums them up.
 #### floating-point.c
 ```c
 #include <stdint.h>
