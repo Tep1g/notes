@@ -21,3 +21,4 @@ For this research topic, we'll be going through the following exercises.
 - [Exercise 3](Gem5/Exercises/Exercise-3)
 - [Exercise 4](Gem5/Exercises/Exercise-4)
 - [Exercise 5](Gem5/Exercises/Exercise-5)
+- [Exercise 6](Gem5/Exercises/Exercise-6)
